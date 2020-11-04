@@ -1,4 +1,4 @@
 package com.example.Model.Entities;
 
-public class EntityExample {
+public class EntityExample: Recycler {
 }
