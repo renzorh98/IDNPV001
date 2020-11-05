@@ -1,13 +1,13 @@
-package com.example.View.UI.ui.dashboard
+package com.example.View.UI.ui.music
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class MusicViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is music Fragment"
     }
     val text: LiveData<String> = _text
 }

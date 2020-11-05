@@ -1,4 +1,4 @@
-package com.example.View.UI.ui.dashboard
+package com.example.View.UI.ui.workout
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.idnpv001.R
 
-class DashboardFragment : Fragment() {
+class WorkoutFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var workoutViewModel: WorkoutViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        workoutViewModel =
+            ViewModelProvider(this).get(WorkoutViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_workout, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        workoutViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
