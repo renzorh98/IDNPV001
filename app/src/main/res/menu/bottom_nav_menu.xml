@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_analytics"
+        android:id="@+id/navigation_history"
         android:icon="@drawable/analytics_24px"
         android:title="@string/title_history" />
 
