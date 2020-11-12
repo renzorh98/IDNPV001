@@ -1,3 +1,4 @@
+
 package com.example.View.UI.Fragments.music
 
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -29,6 +30,7 @@ class MusicFragment : Fragment() {
         musicViewModel =
             ViewModelProvider(this).get(MusicViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_music, container, false)
+
         val textView: TextView = root.findViewById(R.id.text_notifications)
         val avdImage: ImageView = root.findViewById(R.id.avdImage)
         var isChecked = true
@@ -45,6 +47,7 @@ class MusicFragment : Fragment() {
         musicViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
         return root
     }
 
