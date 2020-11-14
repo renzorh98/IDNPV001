@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.ViewModel.MusicViewModel
 import com.example.idnpv001.R
 import kotlinx.android.synthetic.main.fragment_music.*
@@ -27,11 +28,18 @@ class MusicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         musicViewModel =
             ViewModelProvider(this).get(MusicViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_music, container, false)
 
-        val textView: TextView = root.findViewById(R.id.text_notifications)
+        val goToList:ImageView = root.findViewById(R.id.musicList)
+
+        goToList.setOnClickListener{
+            findNavController().navigate(R.id.navigation_music_list)
+        }
+
+        /*
         val avdImage: ImageView = root.findViewById(R.id.avdImage)
         var isChecked = true
         avdImage.setOnClickListener{
@@ -44,13 +52,13 @@ class MusicFragment : Fragment() {
 
             isChecked = !isChecked
         }
-        musicViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        */
+
 
         return root
     }
 
+    /*
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun pauseToPlay() {
         avdImage.setImageResource(R.drawable.pause_to_play)
@@ -65,4 +73,6 @@ class MusicFragment : Fragment() {
         val avdPlayToPause: AnimatedVectorDrawable = avdImage.drawable as AnimatedVectorDrawable
         avdPlayToPause.start()
     }
+    */
+
 }
