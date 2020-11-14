@@ -14,9 +14,6 @@ import com.example.idnpv001.R
 class MainActivityView : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        }
 
         super.onCreate(savedInstanceState)
 
