@@ -4,6 +4,31 @@
     <string name="title_history">History</string>
     <string name="title_workout">Workout</string>
     <string name="title_music">Music</string>
+    <string name="title_login">Login</string>
+    <string name="title_signup">Sign Up</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="title_dialog_login">Log in Result</string>
+    <string name="title_dialog_sign_up">Sign up Result</string>
+    <string name="fill_inputs_login">"please fill all inputs to achieve log in"</string>
+    <string name="fill_inputs_sign_up">"please fill all inputs to achieve sign up"</string>
+    <string name="incorrect_email">"Incorrect email, please check your entry "Email" to achieve login"</string>
+    <string name="incorrect_password">"Incorrect password, please check your entry "Password" to achieve login"</string>
+    <string name="fatal_error">"Fatal error, please run!"</string>
+    <string name="sign_in">Sign in</string>
+    <string name="anonymous_login">anonymous login</string>
+    <string name="login_whit_user">Login whit user</string>
+    <string name="todo">TODO</string>
+
 </resources>

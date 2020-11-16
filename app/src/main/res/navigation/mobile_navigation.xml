@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_workout">
+    app:startDestination="@+id/navigation_login_ini">
+
 
     <fragment
         android:id="@+id/navigation_history"
@@ -36,4 +37,42 @@
             android:id="@+id/action_navigation_music_list_to_navigation_music"
             app:destination="@id/navigation_music" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login_ini"
+        android:name="com.example.View.UI.Fragments.login.LoginIniFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login_ini">
+        <action
+            android:id="@+id/action_navigation_login_ini_to_navigation_login"
+            app:destination="@id/navigation_login"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.View.UI.Fragments.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_login_ini"
+            app:destination="@id/navigation_login_ini"
+            />
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_sign_up"
+            app:destination="@id/navigation_sign_up"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sign_up"
+        android:name="com.example.View.UI.Fragments.login.SignUpFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_navigation_sign_up_to_navigation_login"
+            app:destination="@id/navigation_login"
+            />
+    </fragment>
+
 </navigation>
