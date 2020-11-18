@@ -1,0 +1,63 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.View.UI.Fragments.login.LoginIniFragment"
+    android:background="#ffebee">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Acces Mode"
+        android:textColor="#D72B2929"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logUsrBtn"
+        android:layout_width="155dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button_login"
+        android:text="@string/login_whit_user"
+        android:textColor="#fff"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <Button
+        android:id="@+id/logAnoBtn"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginRight="128dp"
+        android:background="@drawable/button_login"
+        android:text="@string/anonymous_login"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logUsrBtn" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="334dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="268dp"
+        android:src="@drawable/ic_undraw_finish_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/todo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

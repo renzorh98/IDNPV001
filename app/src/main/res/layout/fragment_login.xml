@@ -1,0 +1,129 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.View.UI.Fragments.login.LoginFragment">
+
+    <ImageView
+        android:layout_width="330dp"
+        android:layout_height="359dp"
+        android:layout_marginTop="308dp"
+        android:src="@drawable/ic_undraw_runner_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Log In"
+        android:textColor="#D72B2929"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/mailIV"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_baseline_email_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/userET"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toEndOf="@+id/mailIV"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:backgroundTint="@color/secondaryColor"
+        android:textColor="@color/secondaryColor"
+        android:textColorHint="@color/secondaryColor"
+        />
+
+    <ImageView
+        android:id="@+id/passIV"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_baseline_lock_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mailIV"/>
+
+
+    <EditText
+        android:id="@+id/passET"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:hint="Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toEndOf="@+id/passIV"
+        app:layout_constraintTop_toBottomOf="@+id/userET"
+        android:inputType="textPassword"
+        android:backgroundTint="@color/secondaryColor"
+        android:textColor="@color/secondaryColor"
+        android:textColorHint="@color/secondaryColor"
+
+        />
+
+    <Button
+        android:id="@+id/logBtn"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_login"
+        android:text="Login"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toStartOf="@+id/regBtn"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passET" />
+
+    <Button
+        android:id="@+id/regBtn"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="52dp"
+        android:background="@drawable/button_login"
+        android:text="Sign Up"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passET" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/loginBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_arrow_back_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true"
+        android:contentDescription="@string/todo" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
