@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.Model.Adapters.SongAdapter
+import com.example.Model.Entities.Song
 import com.example.idnpv001.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +26,10 @@ class MusicListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var mysongs: List<Song>? = null
+    private var playList: RecyclerView? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var songAdapter: SongAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +48,20 @@ class MusicListFragment : Fragment() {
         // Inflate the layout for this fragment
         val root =  inflater.inflate(R.layout.fragment_music_list, container, false)
 
-        val backButton:ImageView = root.findViewById(R.id.musicListBackButton)
+        mysongs = listOf(
+            Song(null, null, "Segunda Cancion", "Segundo artista"),
+            Song(null, null, "Primera Cancion", "Primer Artista")
+        )
+
+        playList = root.findViewById(R.id.recyclerView)
+        layoutManager = LinearLayoutManager(root.context)
+        songAdapter = SongAdapter(mysongs!!)
+        playList?.layoutManager = layoutManager
+        playList?.adapter = songAdapter
+
+        //val backButton:ImageView = root.findViewById(R.id.musicListBackButton)
         
-        backButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_music))
+        //backButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_music))
 
         return root
     }
