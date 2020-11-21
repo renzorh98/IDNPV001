@@ -6,8 +6,8 @@ import androidx.room.Relation
 data class TrajectoryWithCoordinates (
     @Embedded val trajectory: Trajectory,
     @Relation(
-        parentColumn = "TraCod",
-        entityColumn = "CooTraCod"
+        parentColumn = "TrjCod",
+        entityColumn = "CooTrjCod"
     )
     val coordinates: List<Coordinate>
 )

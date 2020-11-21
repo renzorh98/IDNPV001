@@ -9,8 +9,8 @@ import com.example.Model.Entities.TrainingAndTrajectory
 interface TrainingDao {
 
     @Transaction
-    @Query("SELECT * FROM Trajectory")
-    fun getTrainingAndTrajectory(): List<TrainingAndTrajectory>
+    @Query("SELECT * FROM Training")
+    fun getTrainingAndTrajectory(): List<Training>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(training: Training)

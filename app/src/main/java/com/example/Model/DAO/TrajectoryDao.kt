@@ -11,8 +11,8 @@ import com.example.Model.Entities.TrajectoryWithCoordinates
 interface TrajectoryDao {
 
     @Transaction
-    @Query("SELECT * FROM Coordinate")
-    fun getTrajectoryWithCoordinates(): List<TrajectoryWithCoordinates>
+    @Query("SELECT * FROM Trajectory")
+    fun getTrajectories(): List<Trajectory>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(trajectory: Trajectory)

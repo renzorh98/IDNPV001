@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity()
 data class Coordinate (
     @PrimaryKey(autoGenerate = true) val CooDoc: Int,
-    val CooTraCod: Int,
+    val CooTrjCod: Int,
     val CooLat: Int?,
     val CooLng: Int?
 )
