@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="2dp"
-    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent"
     app:cardUseCompatPadding="true"
+
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
@@ -19,7 +20,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@mipmap/default_album"
+            android:src="@mipmap/default_album_foreground"
             android:id="@+id/music_item_song_album"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
