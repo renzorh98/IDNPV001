@@ -10,13 +10,30 @@
         android:id="@+id/navigation_history"
         android:name="com.example.View.UI.Fragments.history.HistoryFragment"
         android:label="@string/title_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_navigation_history_to_fragment_history_detail"
+            app:destination="@id/fragment_history_detail" />
+        <action
+            android:id="@+id/action_navigation_history_to_navigation_workout"
+            app:destination="@id/navigation_workout" />
+        <action
+            android:id="@+id/action_navigation_history_to_navigation_music_list"
+            app:destination="@id/navigation_music_list" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_workout"
         android:name="com.example.View.UI.Fragments.workout.WorkoutFragment"
         android:label="@string/title_workout"
-        tools:layout="@layout/fragment_workout" />
+        tools:layout="@layout/fragment_workout" >
+        <action
+            android:id="@+id/action_navigation_workout_to_navigation_history"
+            app:destination="@id/navigation_history" />
+        <action
+            android:id="@+id/action_navigation_workout_to_navigation_music_list"
+            app:destination="@id/navigation_music_list" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_music"
@@ -36,6 +53,12 @@
         <action
             android:id="@+id/action_navigation_music_list_to_navigation_music"
             app:destination="@id/navigation_music" />
+        <action
+            android:id="@+id/action_navigation_music_list_to_navigation_workout"
+            app:destination="@id/navigation_workout" />
+        <action
+            android:id="@+id/action_navigation_music_list_to_navigation_history"
+            app:destination="@id/navigation_history" />
     </fragment>
 
     <fragment
@@ -47,6 +70,9 @@
             android:id="@+id/action_navigation_login_ini_to_navigation_login"
             app:destination="@id/navigation_login"
             />
+        <action
+            android:id="@+id/action_navigation_login_ini_to_navigation_workout"
+            app:destination="@id/navigation_workout" />
     </fragment>
 
     <fragment
@@ -62,6 +88,9 @@
             android:id="@+id/action_navigation_login_to_navigation_sign_up"
             app:destination="@id/navigation_sign_up"
             />
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_workout"
+            app:destination="@id/navigation_workout" />
     </fragment>
 
     <fragment
@@ -73,6 +102,15 @@
             android:id="@+id/action_navigation_sign_up_to_navigation_login"
             app:destination="@id/navigation_login"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_history_detail"
+        android:name="com.example.idnpv001.fragment_history_detail"
+        android:label="fragment_history_detail"
+        tools:layout="@layout/fragment_history_detail" >
+        <action
+            android:id="@+id/action_fragment_history_detail_to_navigation_history"
+            app:destination="@id/navigation_history" />
     </fragment>
 
 </navigation>

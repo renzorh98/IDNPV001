@@ -7,7 +7,6 @@
     app:cardElevation="0dp"
     app:cardBackgroundColor="@android:color/transparent"
     app:cardUseCompatPadding="true"
-
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
@@ -30,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/music_item_song_name"
-            android:text="Song Name"
+            android:text="Starboy"
             android:textSize="23dp"
             android:textColor="@color/primaryColor"
             android:textStyle="bold"
@@ -43,13 +42,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/music_item_song_artist"
-            android:text="Song Artist"
+            android:text="The weekend"
+            android:textStyle="bold"
+            android:alpha="0.7"
             android:textSize="17dp"
             android:textColor="@color/primaryColor"
             android:layout_toRightOf="@id/music_item_song_album"
             android:layout_below="@id/music_item_song_name"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"/>
+
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
