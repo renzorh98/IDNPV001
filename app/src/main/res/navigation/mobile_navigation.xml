@@ -105,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_history_detail"
-        android:name="com.example.idnpv001.fragment_history_detail"
+        android:name="com.example.View.UI.Fragments.history.HistoryDetail"
         android:label="fragment_history_detail"
         tools:layout="@layout/fragment_history_detail" >
         <action

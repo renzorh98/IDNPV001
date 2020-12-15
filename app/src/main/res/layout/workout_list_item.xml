@@ -6,6 +6,7 @@
     app:cardElevation="0dp"
     app:cardUseCompatPadding="true"
     android:clickable="true"
+    app:cardBackgroundColor="@color/backgroundColor"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp">
+            android:layout_marginLeft="30dp">
             <TextView
                 android:id="@+id/workout_list_item_distance"
                 android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
             android:id="@+id/workout_list_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="48dp"
             android:alpha="0.6"
             android:text="Frid. 11/12/2020"

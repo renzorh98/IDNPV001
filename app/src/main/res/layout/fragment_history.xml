@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:text="00:30:10"
         android:textColor="@color/secondaryColor"
         android:textSize="35sp"
@@ -103,9 +103,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:text="Calories"
         android:textColor="@color/secondaryColor"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/text_history_totalCalories"
         app:layout_constraintStart_toStartOf="@+id/text_history_totalCalories"
         app:layout_constraintTop_toBottomOf="@+id/text_history_totalCalories" />
@@ -128,9 +130,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:text="Total distance"
         android:textColor="@color/secondaryColor"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/text_history_totalDistance"
         app:layout_constraintStart_toStartOf="@+id/text_history_totalDistance"
         app:layout_constraintTop_toBottomOf="@+id/text_history_totalDistance" />
@@ -139,8 +143,9 @@
         android:id="@+id/recyclerViewHistory"
         android:layout_width="361dp"
         android:layout_height="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="123dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_history_title" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
