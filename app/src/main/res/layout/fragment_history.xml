@@ -46,8 +46,8 @@
         android:textColor="@color/secondaryColor"
         android:textSize="35sp"
         android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView2"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewHistory"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHistory" />
 
     <TextView
         android:id="@+id/textView11"
@@ -70,7 +70,7 @@
         android:textSize="35sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/text_history_totalTime"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView2"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewHistory"
         app:layout_constraintStart_toEndOf="@+id/text_history_totalTime" />
 
     <TextView
@@ -136,7 +136,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_history_totalDistance" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/recyclerViewHistory"
         android:layout_width="361dp"
         android:layout_height="300dp"
         android:layout_marginTop="30dp"
