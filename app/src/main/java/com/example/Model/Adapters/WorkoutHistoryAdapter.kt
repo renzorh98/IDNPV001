@@ -1,10 +1,14 @@
 package com.example.Model.Adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.core.os.persistableBundleOf
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Model.Entities.Workout
 import com.example.idnpv001.R
@@ -35,9 +39,13 @@ class WorkoutHistoryAdapter(private val workouts: List<Workout>) : RecyclerView.
 
     override fun onBindViewHolder(holder: WorkoutHistoryAdapter.WorkoutHistoryHolder, position: Int) {
         val workout = workouts.get(position)
+
         holder.itemView.setOnClickListener {
-           // findNavController().navigate(R.id.fragment_history_detail)
+            val workoutId = "1"
+            val bundle = bundleOf("workoutId" to workoutId)
+            it.findNavController().navigate(R.id.action_navigation_history_to_fragment_history_detail, bundle)
         }
+
         holder.workoutDistance?.text = workout.distance
         holder.workoutTime?.text = workout.time
         holder.workoutDate?.text = workout.date
