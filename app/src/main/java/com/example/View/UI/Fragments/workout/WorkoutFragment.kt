@@ -17,10 +17,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import android.Manifest
+import android.annotation.SuppressLint
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
-import com.example.dto.Coordinate
 import com.example.dto.Training
+import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.android.synthetic.main.fragment_workout.*
 
 class WorkoutFragment : Fragment(), OnMapReadyCallback {
 
@@ -29,6 +33,7 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
     private lateinit var workoutViewModel: WorkoutViewModel
     private lateinit var mMap: GoogleMap
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +42,12 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
         workoutViewModel =
             ViewModelProvider(this).get(WorkoutViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_workout, container, false)
+        btn_start.setOnClickListener{
+            startTraining()
+        }
+        btn_stop.setOnClickListener {
+            stopTraining()
+        }
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -46,11 +57,20 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+
         super.onActivityCreated(savedInstanceState)
         prepRequestLocationUpdates()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun stopTraining(){
+        workoutViewModel.setData(training.trainingId, chronometer.text)
+        chronometer.stop()
+
+    }
     private fun startTraining(){
+
+        chronometer.start()
         training = workoutViewModel.createTraining()
     }
 
@@ -66,6 +86,12 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
     private fun requestLocationUpdates() {
         workoutViewModel.getLocationLiveData().observe(viewLifecycleOwner, Observer {
             workoutViewModel.addCoordinate(training.trainingId, it)
+            mMap.addPolyline(PolylineOptions()
+                .clickable(true)
+                .add(
+                    LatLng(it.latitude, it.longitude)
+                )
+            )
         })
     }
 
@@ -88,11 +114,12 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
         if (googleMap != null) {
             mMap = googleMap
         }
-
+        mMap.isMyLocationEnabled = true
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))

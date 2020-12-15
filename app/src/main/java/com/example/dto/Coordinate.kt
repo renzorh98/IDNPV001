@@ -1,3 +1,3 @@
 package com.example.dto
 
-data class Coordinate (val longitude: String, val latitude:String)
+data class Coordinate (val longitude: Double, val latitude:Double)

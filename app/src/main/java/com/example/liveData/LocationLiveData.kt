@@ -45,7 +45,7 @@ class LocationLiveData(application: Application) : LiveData<Coordinate>() {
         }
     }
     private fun setLocationData(location: Location){
-        value = Coordinate(location.latitude.toString(), location.longitude.toString())
+        value = Coordinate(location.latitude, location.longitude)
     }
 
     companion object{
