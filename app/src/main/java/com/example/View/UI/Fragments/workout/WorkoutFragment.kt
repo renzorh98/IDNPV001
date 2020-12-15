@@ -23,6 +23,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import com.example.dto.Training
+
 import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.android.synthetic.main.fragment_workout.*
 
