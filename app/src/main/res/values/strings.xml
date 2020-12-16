@@ -32,5 +32,6 @@
     <string name="todo">TODO</string>
     <string name="title_activity_maps">Map</string>
     <string name="stop_training">Stop training</string>
+    <string name="latitude">latitude</string>
 
 </resources>
