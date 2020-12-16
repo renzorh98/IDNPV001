@@ -1,15 +1,18 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.View.UI.Fragments.music.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Model.Adapters.SongAdapter
+import com.example.Model.Entities.PlayerList
 import com.example.Model.Entities.Song
+import com.example.View.UI.MainActivityView
 import com.example.idnpv001.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,10 +29,11 @@ class MusicListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var mysongs: List<Song>? = null
+    private lateinit var mysongs: ArrayList<Song>
     private var playList: RecyclerView? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var songAdapter: SongAdapter? = null
+    private lateinit var playerList: PlayerList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +41,6 @@ class MusicListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
 
     }
 
@@ -48,22 +51,17 @@ class MusicListFragment : Fragment() {
         // Inflate the layout for this fragment
         val root =  inflater.inflate(R.layout.fragment_music_list, container, false)
 
-        mysongs = listOf(
-            Song(null, null, "Segunda Cancion", "Segundo artista"),
-            Song(null, null, "Primera Cancion", "Primer Artista")
-        )
-
         playList = root.findViewById(R.id.recyclerView)
         layoutManager = LinearLayoutManager(root.context)
-        songAdapter = SongAdapter(mysongs!!)
+        songAdapter = SongAdapter((activity as MainActivityView).playerList)
         playList?.layoutManager = layoutManager
         playList?.adapter = songAdapter
 
-        //val backButton:ImageView = root.findViewById(R.id.musicListBackButton)
-        
-        //backButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_music))
-
         return root
+    }
+
+    fun asd(){
+
     }
 
     companion object {

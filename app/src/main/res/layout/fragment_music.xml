@@ -47,7 +47,8 @@
         android:layout_marginTop="16dp"
         android:text="0:00"
         app:layout_constraintStart_toStartOf="@+id/currentSongProgress"
-        app:layout_constraintTop_toBottomOf="@+id/currentSongProgress" />
+        app:layout_constraintTop_toBottomOf="@+id/currentSongProgress"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/currentSongArtist"
@@ -59,7 +60,8 @@
         android:text="Song Artist"
         android:textColor="@color/secondaryColor"
         app:layout_constraintStart_toStartOf="@+id/currentSongName"
-        app:layout_constraintTop_toBottomOf="@+id/currentSongName" />
+        app:layout_constraintTop_toBottomOf="@+id/currentSongName"
+        android:maxLength="140"/>
 
     <TextView
         android:id="@+id/currentSongTotalTime"
@@ -69,6 +71,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="3:16"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/currentSongProgress"
         app:layout_constraintTop_toBottomOf="@+id/currentSongProgress" />
 
@@ -80,6 +83,18 @@
         android:layout_marginLeft="57dp"
         android:layout_marginBottom="69dp"
         android:text="Song Name"
+        android:textColor="@color/secondaryColor"
+        app:layout_constraintBottom_toTopOf="@+id/currentSongProgress"
+        app:layout_constraintStart_toStartOf="parent"
+        android:maxLength="140"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginLeft="168dp"
+        android:layout_marginBottom="108dp"
+        android:text="Now Playing"
         android:textColor="@color/secondaryColor"
         app:layout_constraintBottom_toTopOf="@+id/currentSongProgress"
         app:layout_constraintStart_toStartOf="parent" />
@@ -106,25 +121,47 @@
         app:layout_constraintTop_toBottomOf="@+id/currentSongAlbum" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/btnPrev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:layout_marginBottom="103dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="110dp"
         android:src="@drawable/ic_skip_previous"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/currentSongArtist"
-        app:layout_constraintStart_toStartOf="@+id/currentSongArtist"
-        app:layout_constraintTop_toBottomOf="@+id/currentSongProgress" />
+        app:layout_constraintEnd_toStartOf="@+id/currentSongStatus" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/btnSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="110dp"
         android:src="@drawable/ic_skip_next"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/currentSongAlbum"
-        app:layout_constraintStart_toStartOf="@+id/currentSongTotalTime"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/currentSongStatus" />
+
+    <ImageView
+        android:id="@+id/btnLoop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="110dp"
+        android:src="@drawable/ic_loop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnSkip" />
+
+    <ImageView
+        android:id="@+id/btnShuffle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="110dp"
+        android:src="@drawable/ic_shuffle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnPrev" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
