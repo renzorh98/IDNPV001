@@ -9,7 +9,6 @@ import android.os.IBinder
 import android.util.Log
 
 class MusicService(): Service() {
-
     inner class MyBinder() : Binder() {
         fun getService(): MusicService{
             return this@MusicService

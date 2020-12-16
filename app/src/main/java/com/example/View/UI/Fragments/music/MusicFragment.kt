@@ -21,7 +21,6 @@ import com.example.idnpv001.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MusicFragment : Fragment(){
-
     private lateinit var musicViewModel: MusicViewModel
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
