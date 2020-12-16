@@ -243,7 +243,6 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
         musicService?.createMediaPlayer(_path)
         musicService?.mediaPlayer?.setOnCompletionListener{
             btn_nextClicked(true)
-
         }
         musicService!!.start()
     }
