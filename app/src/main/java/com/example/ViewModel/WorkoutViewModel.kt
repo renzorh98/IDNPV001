@@ -1,33 +1,32 @@
 package com.example.ViewModel
 
 import android.app.Application
+import android.location.Location
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.View.UI.Fragments.workout.LocationLiveData
 import com.example.dto.Coordinate
-import com.example.liveData.LocationLiveData
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private var reference: DatabaseReference
-    init {
-        reference = database.getReference("idnpv001-default-rtdb")
-    }
+    private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
     private val locationLiveData = LocationLiveData(application)
-    fun getLocationLiveData() = locationLiveData
-    fun addCoordinate(trainingId: String,coordinate: Coordinate) {
-        val id = reference.push().key
-        reference.child("trainings").child(trainingId).child("coordinates").child(id!!).setValue(coordinate)
-    }
+    internal fun getLocationLiveData() = locationLiveData
 
-class WorkoutViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is workout Fragment"
+    fun getCurrentLocation(mMap: GoogleMap){
+
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(it.latitude, it.longitude))
+                        .title("My position"))
+            }
+
     }
-    val text: LiveData<String> = _text
-}}
+}
