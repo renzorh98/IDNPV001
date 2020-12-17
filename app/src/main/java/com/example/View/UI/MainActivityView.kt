@@ -135,8 +135,8 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
         super.onResume()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         unbindService(this)
     }
 
