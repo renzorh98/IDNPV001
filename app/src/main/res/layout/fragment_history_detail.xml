@@ -8,7 +8,7 @@
     tools:context="com.example.View.UI.Fragments.history.HistoryDetail">
 
     <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+        android:id="@+id/mapViewWorkout"
         android:layout_width="0dp"
         android:layout_height="323dp"
         android:layout_marginTop="1dp"
@@ -31,7 +31,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        app:layout_constraintTop_toBottomOf="@+id/mapViewWorkout" />
 
     <TextView
         android:id="@+id/textViewDetailDate"
@@ -167,7 +167,7 @@
         android:src="@drawable/ic_star_outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewDetailNameWorkout"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/mapViewWorkout"
         app:tint="@color/black" />
 
     <ImageView
