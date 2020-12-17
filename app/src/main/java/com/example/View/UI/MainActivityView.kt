@@ -38,17 +38,13 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
         setContentView(R.layout.activity_main_view)
         requestLocationPermissions()
         requestReadStoragePermissions()
-
-        playerList = PlayerList(applicationContext)
-        Log.e("asdasd", ""+playerList.getSize())
-
         var intent: Intent = Intent(applicationContext, MusicService::class.java)
         bindService(intent, this, Context.BIND_AUTO_CREATE)
         //musicService?.createMediaPlayer(playerList.getSongSelected().mFilePath)
 
 
         var PRIVATE_MODE = Context.MODE_PRIVATE
-        val PREF_NAME = "ActiveUser"
+        val PREF_NAME = "ActiveUserEnd"
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         val namAct: String? = sharedPref.getString("name", "0")
 
@@ -62,6 +58,9 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
             navController.setGraph(navGraph)
         }
         else {
+            playerList = PlayerList(applicationContext)
+            Log.e("asdasd", ""+playerList.getSize())
+
             val navView: BottomNavigationView = findViewById(R.id.nav_view)
             navView.visibility = View.VISIBLE
 
@@ -137,7 +136,6 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
 
     override fun onDestroy() {
         super.onDestroy()
-        unbindService(this)
     }
 
 

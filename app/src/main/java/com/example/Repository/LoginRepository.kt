@@ -12,7 +12,7 @@ class LoginRepository(context: Context) {
 
     private lateinit var prefAct: SharedPreferences
     private lateinit var editAct: SharedPreferences.Editor
-    private val ACTNAME = "ActiveUser"
+    private val ACTNAME = "ActiveUserEnd"
 
     init{
         Log.e("context", context.toString())
