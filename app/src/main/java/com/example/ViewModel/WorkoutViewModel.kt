@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.database.DatabaseReference
 import java.time.LocalDateTime
+import java.util.*
 
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
@@ -31,7 +32,7 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
     @RequiresApi(Build.VERSION_CODES.O)
     fun addTraining():Training? {
         val key = ref.child("trainings").push().key ?: return null
-        var training = Training(key,LocalDateTime.now(),0.0,"", "run")
+        var training = Training(key, Calendar.getInstance().time.time,0.1,"", "run")
         ref.child("trainings").child(key).setValue(training)
         //addUserWithTraining(key)
         return training

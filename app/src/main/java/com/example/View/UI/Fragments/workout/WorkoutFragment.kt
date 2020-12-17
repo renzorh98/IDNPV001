@@ -55,8 +55,6 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
         mapFragment.onCreate(this.arguments)
 
 
-
-
         return root
     }
 

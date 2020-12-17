@@ -1,6 +1,7 @@
 package com.example.View.UI.Fragments.history
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import com.example.Model.Entities.Training
-import com.example.Model.Entities.Workout
+import com.example.dto.Coordinate
+import com.example.dto.Training
 import com.example.idnpv001.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,6 +20,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.getValue
+import java.util.*
+import kotlin.collections.HashMap
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,6 +43,7 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
     private lateinit var database: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
     private lateinit var workout: Training
+    private lateinit var route: MutableList<Coordinate>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,16 +64,32 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
 
         workoutId?.let {
             database = FirebaseDatabase.getInstance()
-            myRef = database.getReference("trainings").child(it as String)
+            //child to wokrout id
+            myRef = database.getReference("trainings").child("-MOiEMuSsPW5e1PXuu1j")
 
             val postListener = object: ValueEventListener{
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //val workout =
+                    route = mutableListOf<Coordinate>()
+
+                    workout = Training(
+                        snapshot.child("trainingId").value as String,
+                        snapshot.child("date").value as Long,
+                        snapshot.child("distance").value as Double,
+                        snapshot.child("time").value as String,
+                        snapshot.child("type").value as String)
+
+                    val coordinates = snapshot.child("coordinates")
+                    for(c in coordinates.children){
+                        val lat = c.child("latitude").value as Double
+                        val lon = c.child("longitude").value as Double
+                        route.add(Coordinate(lon, lat))
+                    }
+                    Log.e("DATA", "some")
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    Log.e("ERORR", "fail")
                 }
 
             }
