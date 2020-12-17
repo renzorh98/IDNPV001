@@ -8,8 +8,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.example.Model.Entities.Training
 import com.example.Model.Entities.Workout
 import com.example.idnpv001.R
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Polyline
+import com.google.android.gms.maps.model.PolylineOptions
+import com.google.firebase.database.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,10 +30,15 @@ private const val ARG_PARAM2 = "param2"
  * Use the [fragment_history_detail.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HistoryDetail : Fragment() {
+class HistoryDetail : Fragment(), OnMapReadyCallback {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var map: GoogleMap
+    private lateinit var database: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
+    private lateinit var workout: Training
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +57,25 @@ class HistoryDetail : Fragment() {
 
         val workoutId = arguments?.get("workoutId")
 
+        workoutId?.let {
+            database = FirebaseDatabase.getInstance()
+            myRef = database.getReference("trainings").child(it as String)
+
+            val postListener = object: ValueEventListener{
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //val workout =
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+
+            myRef.addListenerForSingleValueEvent(postListener)
+        }
+
         val backButton = root.findViewById<ImageView>(R.id.imageViewBackHistoryDetail)
         val nameWorkout = root.findViewById<TextView>(R.id.textViewDetailNameWorkout)
         val dateWorkout = root.findViewById<TextView>(R.id.textViewDetailDate)
@@ -50,6 +83,10 @@ class HistoryDetail : Fragment() {
         val distanceWorkout = root.findViewById<TextView>(R.id.textViewDetailDistance)
         val caloriesWorkout = root.findViewById<TextView>(R.id.textViewDetailCalories)
         val speedWorkout = root.findViewById<TextView>(R.id.textViewDetailSpeed)
+
+        val workoutMapView = root.findViewById<MapView>(R.id.mapViewWorkout)
+        workoutMapView.onCreate(this.arguments)
+        workoutMapView.getMapAsync(this)
 
         backButton.setOnClickListener {
             findNavController().navigate(R.id.navigation_history)
@@ -84,5 +121,22 @@ class HistoryDetail : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onMapReady(p0: GoogleMap?) {
+        p0?.let {
+            map = it
+            val workoutPath:Polyline = map.addPolyline(PolylineOptions()
+                .clickable(true)
+                .add(
+                    LatLng(-35.016, 143.321),
+                    LatLng(-34.747, 145.592),
+                    LatLng(-34.364, 147.891),
+                    LatLng(-33.501, 150.217),
+                    LatLng(-32.306, 149.248),
+                    LatLng(-32.491, 147.309))
+            )
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(-23.684, 133.903), 4f))
+        }
     }
 }
