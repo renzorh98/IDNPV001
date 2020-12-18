@@ -1,7 +1,7 @@
 package com.example.Model.Entities
 
 class Workout(
-    val trainnig: Training?,
+    val trainnig: String,
     val nameWorkout: String,
     val date: String,
     val time: String,

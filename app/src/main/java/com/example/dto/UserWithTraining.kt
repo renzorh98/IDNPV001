@@ -4,15 +4,13 @@ import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-data class Coordinate (
-    var longitude: Double,
-    var latitude:Double)
-{
+data class UserWithTraining (
+    var workoutId: String
+){
     @Exclude
     fun toMap(): Map<String, Any?>{
         return mapOf(
-            "longitude" to longitude,
-            "latitude" to  latitude
+            "uid" to  workoutId
         )
     }
 }

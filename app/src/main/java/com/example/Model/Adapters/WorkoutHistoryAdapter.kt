@@ -41,7 +41,7 @@ class WorkoutHistoryAdapter(private val workouts: List<Workout>) : RecyclerView.
         val workout = workouts.get(position)
 
         holder.itemView.setOnClickListener {
-            val workoutId = "1"
+            val workoutId = workout.trainnig
             val bundle = bundleOf("workoutId" to workoutId)
             it.findNavController().navigate(R.id.action_navigation_history_to_fragment_history_detail, bundle)
         }

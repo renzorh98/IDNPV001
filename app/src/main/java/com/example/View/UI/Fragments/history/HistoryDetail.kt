@@ -71,7 +71,7 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     route = mutableListOf<Coordinate>()
-
+/*
                     workout = Training(
                         snapshot.child("trainingId").value as String,
                         snapshot.child("date").value as Long,
@@ -86,6 +86,7 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
                         route.add(Coordinate(lon, lat))
                     }
                     Log.e("DATA", "some")
+                    */
                 }
 
                 override fun onCancelled(error: DatabaseError) {
