@@ -59,10 +59,11 @@ class HistoryFragment : Fragment() {
         })
 
         loginRepository = LoginRepository(root.context)
-        val user_key = loginRepository.getCurrentUser()
+        val userId = loginRepository.getCurrentUserID()
 
         database = FirebaseDatabase.getInstance()
         myRef = database.getReference("userWithTrainings").child("-MOnoNhYGdrNY_UTv6Re")
+        //myRef = database.getReference("userWithTrainings").child(userId)
 
         var trainings = mutableListOf<String>()
         myworkouts = mutableListOf<Workout>()
@@ -97,15 +98,6 @@ class HistoryFragment : Fragment() {
             activity?.finish()
         }
 
-/*
-        myworkouts = listOf(
-            Workout(null, "Wake up", "12-12-2020", "00:45:00", "1,40km", "1000", "10.5km"),
-            Workout(null, "Wake up", "12-12-2020", "00:45:00", "1,40km", "1000", "10.5km"),
-            Workout(null, "Wake up", "12-12-2020", "00:45:00", "1,40km", "1000", "10.5km"),
-            Workout(null, "Wake up", "12-12-2020", "00:45:00", "1,40km", "1000", "10.5km"),
-            Workout(null, "Wake up", "12-12-2020", "00:45:00", "1,40km", "1000", "10.5km")
-        )
-*/
         workouts = root.findViewById(R.id.recyclerViewHistory)
         layoutManager = LinearLayoutManager(root.context)
         workoutAdapter = WorkoutHistoryAdapter(myworkouts!!)
@@ -139,7 +131,7 @@ class HistoryFragment : Fragment() {
 
                     snapshot.child("date").getValue<Long>()?.let {
                         val aux = Date(it)
-                        val format = SimpleDateFormat("yyyy.MM.dd HH:mm")
+                        val format = SimpleDateFormat("HH:mm yyyy.MM.dd")
                         date = format.format(aux)
                     }
 
@@ -164,6 +156,8 @@ class HistoryFragment : Fragment() {
                     myworkouts.add(newWorkout)
 
                     workoutAdapter?.notifyDataSetChanged()
+
+                    UpdateView()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -174,5 +168,9 @@ class HistoryFragment : Fragment() {
 
             myRef.addValueEventListener(postListener)
         }
+    }
+
+    fun UpdateView(){
+
     }
 }

@@ -82,7 +82,7 @@ class LoginRepository(context: Context) {
     fun getCurrentUserName(): String{
         return prefAct.getString("name","-1").toString()
     }
-    fun getCurrenUserID(): String{
+    fun getCurrentUserID(): String{
         return prefAct.getString("userID", "-1").toString()
     }
 
