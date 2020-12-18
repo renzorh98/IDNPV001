@@ -39,6 +39,7 @@
         android:id="@+id/textViewDetailDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:alpha="0.5"
         android:text="Frid. 11/13/20"
         android:textColor="#000"
@@ -51,13 +52,14 @@
         android:id="@+id/textViewDetailTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginBottom="5dp"
         android:text="00:13:30"
         android:textColor="#000000"
         android:textSize="27sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewDetailSpeed"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewDetailSpeed" />
 
@@ -65,107 +67,101 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginRight="34dp"
+        android:layout_marginBottom="60dp"
         android:alpha="0.5"
         android:text="Time"
         android:textColor="#000000"
         android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDetailCalories"
         app:layout_constraintEnd_toEndOf="@+id/textViewDetailTime"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetailTime" />
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailTime" />
 
     <TextView
         android:id="@+id/textViewDetailSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        android:layout_marginBottom="194dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="5dp"
         android:text="2,0 km/h"
         android:textColor="#000000"
         android:textSize="27sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="60dp"
         android:alpha="0.5"
         android:text="Speed"
         android:textColor="#000000"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewDetailSpeed"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetailSpeed" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewDetailDistance"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDetailSpeed"
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailSpeed" />
 
     <TextView
         android:id="@+id/textViewDetailCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="62dp"
-        android:layout_marginBottom="87dp"
+        android:layout_marginBottom="5dp"
         android:text="100.0"
         android:textColor="#000000"
         android:textSize="27sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDetailTime"
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailTime" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="35dp"
         android:alpha="0.5"
         android:text="Calories"
         android:textColor="#000000"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textViewDetailCalories"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetailCalories" />
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailCalories" />
 
     <TextView
         android:id="@+id/textViewDetailDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
+        android:layout_marginBottom="5dp"
         android:text="3,2 km"
         android:textColor="#000000"
         android:textSize="27sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewDetailCalories"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewDetailCalories" />
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDetailSpeed"
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailSpeed" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="35dp"
         android:alpha="0.5"
         android:text="Distance"
         android:textColor="#000000"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textViewDetailDistance"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetailDistance" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDetailDistance"
+        app:layout_constraintStart_toStartOf="@+id/textViewDetailDistance" />
 
     <ImageView
         android:id="@+id/imageButton"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:src="@drawable/ic_star_outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewDetailNameWorkout"
