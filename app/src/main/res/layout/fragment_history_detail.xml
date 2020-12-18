@@ -7,14 +7,16 @@
     android:layout_height="match_parent"
     tools:context="com.example.View.UI.Fragments.history.HistoryDetail">
 
-    <com.google.android.gms.maps.MapView
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapViewWorkout"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="323dp"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="com.example.View.UI.Fragments.history.HistoryDetail"/>
 
     <TextView
         android:id="@+id/textViewDetailNameWorkout"

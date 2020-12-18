@@ -12,10 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.dto.Coordinate
 import com.example.dto.Training
 import com.example.idnpv001.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
@@ -45,6 +42,12 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
     private lateinit var myRef: DatabaseReference
     private lateinit var workout: Training
     private lateinit var route: MutableList<Coordinate>
+    private lateinit var nameWorkout:TextView
+    private lateinit var dateWorkout:TextView
+    private lateinit var timeWorkout:TextView
+    private lateinit var distanceWorkout:TextView
+    private lateinit var caloriesWorkout:TextView
+    private lateinit var speedWorkout:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,14 +65,14 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
         val root = inflater.inflate(R.layout.fragment_history_detail, container, false)
 
         val backButton = root.findViewById<ImageView>(R.id.imageViewBackHistoryDetail)
-        val nameWorkout = root.findViewById<TextView>(R.id.textViewDetailNameWorkout)
-        val dateWorkout = root.findViewById<TextView>(R.id.textViewDetailDate)
-        val timeWorkout = root.findViewById<TextView>(R.id.textViewDetailTime)
-        val distanceWorkout = root.findViewById<TextView>(R.id.textViewDetailDistance)
-        val caloriesWorkout = root.findViewById<TextView>(R.id.textViewDetailCalories)
-        val speedWorkout = root.findViewById<TextView>(R.id.textViewDetailSpeed)
+        nameWorkout = root.findViewById<TextView>(R.id.textViewDetailNameWorkout)
+        dateWorkout = root.findViewById<TextView>(R.id.textViewDetailDate)
+        timeWorkout = root.findViewById<TextView>(R.id.textViewDetailTime)
+        distanceWorkout = root.findViewById<TextView>(R.id.textViewDetailDistance)
+        caloriesWorkout = root.findViewById<TextView>(R.id.textViewDetailCalories)
+        speedWorkout = root.findViewById<TextView>(R.id.textViewDetailSpeed)
 
-        val workoutMapView = root.findViewById<MapView>(R.id.mapViewWorkout)
+        val workoutMapView = childFragmentManager.findFragmentById(R.id.mapViewWorkout) as SupportMapFragment
         workoutMapView.onCreate(this.arguments)
         workoutMapView.getMapAsync(this)
 
@@ -77,67 +80,6 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
             findNavController().navigate(R.id.navigation_history)
         }
 
-        val workoutId = arguments?.get("workoutId")
-
-        workoutId?.let {
-            database = FirebaseDatabase.getInstance()
-            //child to wokrout id
-            myRef = database.getReference("trainings").child(it as String)
-
-            val postListener = object: ValueEventListener{
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    route = mutableListOf<Coordinate>()
-
-                    var date = ""
-                    var distance = 0.0
-                    var time = "00:00"
-                    var type = "Workout"
-
-                    snapshot.child("date").getValue<Long>()?.let {
-                        val aux = Date(it)
-                        val format = SimpleDateFormat("HH:mm yyyy.MM.dd")
-                        date = format.format(aux)
-                    }
-
-                    snapshot.child("distance").getValue<Double>()?.let {
-                        distance = it
-                    }
-
-                    snapshot.child("time").getValue<String>()?.let {
-                        time = it
-                    }
-
-                    snapshot.child("type").getValue<String>()?.let {
-                        type = it
-                    }
-
-                    val coordinates = snapshot.child("coordinates")
-                    for(c in coordinates.children){
-                        var lat = 0.0
-                        var lon = 0.0
-
-                        c.child("latitude").getValue<Double>()?.let {
-                            lat = it
-                        }
-
-                        c.child("longitude").getValue<Double>()?.let {
-                            lon = it
-                        }
-
-                        route.add(Coordinate(lon, lat))
-                    }
-                    updateView()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.e("ERORR", "fail")
-                }
-
-            }
-
-            myRef.addListenerForSingleValueEvent(postListener)
-        }
 
         return root
     }
@@ -151,7 +93,6 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
          * @param param2 Parameter 2.
          * @return A new instance of fragment fragment_history_detail.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HistoryDetail().apply {
@@ -165,21 +106,98 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
     override fun onMapReady(p0: GoogleMap?) {
         p0?.let {
             map = it
-            val workoutPath:Polyline = map.addPolyline(PolylineOptions()
-                .clickable(true)
-                .add(
-                    LatLng(-16.399403, -71.536682),
-                    LatLng(-16.398919, -71.538238),
-                    LatLng(-16.398718, -71.538724),
-                    LatLng(-16.398121, -71.538446),
-                    LatLng(-16.397377, -71.538151),
-                    LatLng(-16.396726, -71.537872))
-            )
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(-16.399403, -71.536682), 16.0f))
+
+            val workoutId = arguments?.get("workoutId")
+
+            workoutId?.let {
+                database = FirebaseDatabase.getInstance()
+                //child to wokrout id
+                myRef = database.getReference("trainings").child(it as String)
+
+                val postListener = object: ValueEventListener{
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        route = mutableListOf<Coordinate>()
+
+                        var date = ""
+                        var distance = 0.0
+                        var time = "00:00"
+                        var name = "Workout"
+                        var calories = ""
+                        var speed = ""
+
+                        snapshot.child("date").getValue<Long>()?.let {
+                            val aux = Date(it)
+                            val format = SimpleDateFormat("HH:mm yyyy.MM.dd")
+                            date = format.format(aux)
+                        }
+
+                        snapshot.child("distance").getValue<Double>()?.let {
+                            distance = it
+                        }
+
+                        snapshot.child("time").getValue<String>()?.let {
+                            time = it
+                        }
+
+                        snapshot.child("type").getValue<String>()?.let {
+                            name = it
+                        }
+
+                        val coordinates = snapshot.child("coordinates")
+
+                        for(c in coordinates.children){
+                            var lat = 0.0
+                            var lon = 0.0
+
+                            c.child("latitude").getValue<Double>()?.let {
+                                lat = it
+                            }
+
+                            c.child("longitude").getValue<Double>()?.let {
+                                lon = it
+                            }
+
+                            route.add(Coordinate(lon, lat))
+                        }
+
+                        val points = PolylineOptions()
+
+                        for(r in route){
+                            points.add(LatLng(r.latitude, r.longitude))
+                        }
+
+                        points.clickable(true)
+
+                        val workoutPath:Polyline = map.addPolyline(points)
+
+                        if(route.size > 0) {
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(route[0].latitude, route[0].longitude), 18.0f))
+                        }
+
+                        updateView(name, date, time, distance, calories, speed)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("ERORR", "fail")
+                    }
+
+                }
+
+                myRef.addListenerForSingleValueEvent(postListener)
+            }
+
+
         }
     }
 
-    fun updateView(){
 
+    fun updateView(name:String, date:String, time:String, distance:Double, calories:String, speed:String){
+        nameWorkout.text = name
+        dateWorkout.text = date
+        timeWorkout.text = time
+        distanceWorkout.text = distance.toString()
+        caloriesWorkout.text = calories
+        speedWorkout.text = speed
     }
 }

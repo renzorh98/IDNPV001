@@ -38,10 +38,10 @@ class HistoryFragment : Fragment() {
     private lateinit var database: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
     private lateinit var loginRepository: LoginRepository
-    private var totalTime = 0
-    private var totalRuns = 0
-    private var calories = 0
-    private var totalDistance = 0
+    private lateinit var totalTime: TextView
+    private lateinit var totalRuns: TextView
+    private lateinit var calories: TextView
+    private lateinit var totalDistance: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,12 +58,20 @@ class HistoryFragment : Fragment() {
             textView.text = it
         })
 
+        totalTime = root.findViewById<TextView>(R.id.text_history_totalTime)
+
+        calories = root.findViewById<TextView>(R.id.text_history_totalCalories)
+
+        totalDistance = root.findViewById<TextView>(R.id.text_history_totalDistance)
+
+        totalRuns = root.findViewById<TextView>(R.id.text_history_totalRuns)
+
         loginRepository = LoginRepository(root.context)
         val userId = loginRepository.getCurrentUserID()
 
         database = FirebaseDatabase.getInstance()
-        myRef = database.getReference("userWithTrainings").child("-MOnoNhYGdrNY_UTv6Re")
-        //myRef = database.getReference("userWithTrainings").child(userId)
+        //myRef = database.getReference("userWithTrainings").child("-MOnoNhYGdrNY_UTv6Re")
+        myRef = database.getReference("userWithTrainings").child(userId)
 
         var trainings = mutableListOf<String>()
         myworkouts = mutableListOf<Workout>()
@@ -73,7 +81,6 @@ class HistoryFragment : Fragment() {
                 for( wId in snapshot.children){
                     wId.key?.let { trainings.add(it) }
                 }
-                totalRuns = trainings.size
                 readWorkouts(trainings)
             }
 
@@ -104,18 +111,15 @@ class HistoryFragment : Fragment() {
         workouts?.layoutManager = layoutManager
         workouts?.adapter = workoutAdapter
 
-        root.findViewById<TextView>(R.id.text_history_totalTime)
-
-        root.findViewById<TextView>(R.id.text_history_totalCalories)
-
-        root.findViewById<TextView>(R.id.text_history_totalDistance)
-
-        root.findViewById<TextView>(R.id.text_history_totalRuns)
 
         return root
     }
 
     fun readWorkouts(trainings: MutableList<String>){
+
+        var totalTi = "00:00"
+        var totalDi = "0"
+        var calo = "0"
 
         for(t in trainings){
             myRef = database.getReference("trainings").child(t)
@@ -157,7 +161,7 @@ class HistoryFragment : Fragment() {
 
                     workoutAdapter?.notifyDataSetChanged()
 
-                    UpdateView()
+                    UpdateView(totalTi, totalDi, trainings.size.toString(), calo)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -170,7 +174,13 @@ class HistoryFragment : Fragment() {
         }
     }
 
-    fun UpdateView(){
+    fun UpdateView(totalTi:String, totalDi:String, totalRu:String, calo:String){
+        totalTime.text = totalTi
 
+        calories.text = calo
+
+        totalDistance.text = totalDi
+
+        totalRuns.text = totalRu
     }
 }

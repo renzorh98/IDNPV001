@@ -46,7 +46,7 @@ class WorkoutHistoryAdapter(private val workouts: List<Workout>) : RecyclerView.
             it.findNavController().navigate(R.id.action_navigation_history_to_fragment_history_detail, bundle)
         }
 
-        holder.workoutDistance?.text = workout.distance
+        holder.workoutDistance?.text = workout.nameWorkout
         holder.workoutTime?.text = workout.time
         holder.workoutDate?.text = workout.date
 
