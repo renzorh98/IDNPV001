@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 
 import androidx.lifecycle.AndroidViewModel
 import com.example.Model.database.AppDatabase
+import com.example.Repository.LoginRepository
 import com.example.View.UI.Fragments.workout.LocationLiveData
 import com.example.dto.Coordinate
 import com.example.dto.Training
@@ -19,8 +20,7 @@ import java.util.*
 
 
 class WorkoutViewModel(application: Application) : AndroidViewModel(application) {
-
-    private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
+    var lgRepository = LoginRepository(application)
     private val locationLiveData = LocationLiveData(application)
     internal fun getLocationLiveData() = locationLiveData
     var database: AppDatabase = AppDatabase()
@@ -29,17 +29,19 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         ref = database.getReference()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun addTraining():Training? {
         val key = ref.child("trainings").push().key ?: return null
         var training = Training(key, Calendar.getInstance().time.time,0.1,"", "run")
         ref.child("trainings").child(key).setValue(training)
-        //addUserWithTraining(key)
+        addUserWithTraining(key)
         return training
     }
 
     private fun addUserWithTraining(key: String?) {
-        ref.child("userWithTrainings").child("0").setValue(key)
+        var user:String = lgRepository.getCurrentUser()
+        if(key!=null){
+            ref.child("userWithTrainings").child(user).child(key).setValue(true)
+        }
     }
     fun addCoordinateToTraining(key: String?, coordinate: Coordinate){
         if(key!=null){
@@ -48,10 +50,6 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun setAttributesTraining(training: Training?, text: CharSequence?, distance: Double) {
         if(training != null){
             ref.child("trainings").child(training.trainingId).child("time").setValue(text)

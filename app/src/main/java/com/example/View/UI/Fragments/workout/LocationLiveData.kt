@@ -1,7 +1,6 @@
 package com.example.View.UI.Fragments.workout
 
 import android.app.Application
-import android.content.Context
 import android.location.Location
 import androidx.lifecycle.LiveData
 import com.example.dto.Coordinate
@@ -10,21 +9,16 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 
-class LocationLiveData(context: Context) : LiveData<Coordinate>() {
+class LocationLiveData(application: Application) : LiveData<Coordinate>() {
 
-    private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-
-    override fun onInactive() {
-        super.onInactive()
-        fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
+    private var fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
 
     override fun onActive() {
         super.onActive()
         fusedLocationClient.lastLocation.addOnSuccessListener {
                 location: Location  -> location.also {
-            setLocationData(it)
-        }
+                        setLocationData(it)
+                }
         }
         startLocationUpdates()
     }
@@ -34,13 +28,14 @@ class LocationLiveData(context: Context) : LiveData<Coordinate>() {
     }
 
     private val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult?) {
-            super.onLocationResult(locationResult)
-
-            locationResult ?: return
-
+        override fun onLocationResult(locationResult: LocationResult) {
+            if(locationResult == null){
+                return
+            }
             for (location in locationResult.locations) {
-                setLocationData(location)
+                if(location!=null){
+                    setLocationData(location)
+                }
             }
         }
     }

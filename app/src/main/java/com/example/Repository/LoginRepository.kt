@@ -3,8 +3,14 @@ package com.example.Repository
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.Model.database.AppDatabase
+import com.example.dto.Training
+import com.example.dto.User
+import com.google.firebase.database.DatabaseReference
+import java.util.*
 
 class LoginRepository(context: Context) {
+
     private lateinit var pref: SharedPreferences
     private lateinit var edit: SharedPreferences.Editor
     private val NAME = "UserLogin"
@@ -14,7 +20,11 @@ class LoginRepository(context: Context) {
     private lateinit var editAct: SharedPreferences.Editor
     private val ACTNAME = "ActiveUserEnd"
 
+    var database: AppDatabase = AppDatabase()
+    private var ref: DatabaseReference
+
     init{
+        ref = database.getReference()
         Log.e("context", context.toString())
         pref = context.getSharedPreferences(NAME, MODE)
         edit = pref.edit()
@@ -29,6 +39,10 @@ class LoginRepository(context: Context) {
         edit.putString("password$user", password)
         edit.putInt("type$user", type)
 
+        val newUser = User(user, user, name, type)
+        ref.child("users").setValue(user)
+        ref.child("users").child(user).setValue(newUser)
+
         edit.commit()
         saveActUser(user, name, type)
     }
@@ -42,13 +56,15 @@ class LoginRepository(context: Context) {
     }
 
     fun saveAnon(type: Int = 0){
-        edit.putString("name", "Anonimo")
-        edit.putString("user", "Anonimo")
+        val key = ref.child("users").push().key ?: return
+        edit.putString("name", key)
+        edit.putString("user", key)
         edit.putString("password", "null")
         edit.putInt("type", type)
-
+        var newUser = User(key,key,key, 1)
+        ref.child("users").child(key).setValue(newUser)
         edit.commit()
-        saveActUser("Anonimo", "Anonimo", type)
+        saveActUser(key, key, type)
     }
 
     fun logout(){
