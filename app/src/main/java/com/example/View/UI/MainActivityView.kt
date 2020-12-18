@@ -191,9 +191,13 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
                 musicService?.createMediaPlayer(playerList.getSongSelected().mFilePath)
                 musicService?.mediaPlayer?.setOnCompletionListener{
                     btn_nextClicked(true)
-
                 }
                 musicService?.start()
+            }else{
+                musicService?.createMediaPlayer(playerList.getSongSelected().mFilePath)
+                musicService?.mediaPlayer?.setOnCompletionListener{
+                    btn_nextClicked(true)
+                }
             }
             try{
                 var fragment = getForegroundFragment()
@@ -227,10 +231,13 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
                 musicService?.createMediaPlayer(playerList.getSongSelected().mFilePath)
                 musicService?.mediaPlayer?.setOnCompletionListener{
                     btn_nextClicked(true)
-
                 }
                 musicService?.start()
-            }
+            }else{
+                musicService?.createMediaPlayer(playerList.getSongSelected().mFilePath)
+                musicService?.mediaPlayer?.setOnCompletionListener{
+                    btn_nextClicked(true)
+                }}
             try{
                 var fragment = getForegroundFragment()
                 (fragment as MusicFragment).updateSelectedSong()
