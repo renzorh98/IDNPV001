@@ -11,12 +11,12 @@ class LoginRepository(context: Context) {
 
     private lateinit var pref: SharedPreferences
     private lateinit var edit: SharedPreferences.Editor
-    private val NAME = "UserLogin"
+    private val NAME = "UsersLoginApp"
     private val MODE = Context.MODE_PRIVATE
 
     private lateinit var prefAct: SharedPreferences
     private lateinit var editAct: SharedPreferences.Editor
-    private val ACTNAME = "ActiveUserEnd"
+    private val ACTNAME = "ActiveUsersApp"
 
     var database: AppDatabase = AppDatabase()
     private var ref: DatabaseReference
