@@ -123,8 +123,8 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
                         var distance = 0.0
                         var time = "00:00"
                         var name = "Workout"
-                        var calories = ""
-                        var speed = ""
+                        var calories = "0"
+                        var speed = "0 km/h"
 
                         snapshot.child("date").getValue<Long>()?.let {
                             val aux = Date(it)

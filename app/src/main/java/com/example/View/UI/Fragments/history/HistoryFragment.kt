@@ -118,7 +118,7 @@ class HistoryFragment : Fragment() {
     fun readWorkouts(trainings: MutableList<String>){
 
         var totalTi = "00:00"
-        var totalDi = "0"
+        var totalDi = 0.0
         var calo = "0"
 
         for(t in trainings){
@@ -140,7 +140,7 @@ class HistoryFragment : Fragment() {
                     }
 
                     snapshot.child("distance").getValue<Double>()?.let {
-                        distance = it
+                        totalDi += it
                     }
 
                     snapshot.child("trainingId").getValue<String>()?.let {
@@ -148,7 +148,9 @@ class HistoryFragment : Fragment() {
                     }
 
                     snapshot.child("time").getValue<String>()?.let {
-                        time = it
+                        if(it.length > 1){
+                            time = it
+                        }
                     }
 
                     snapshot.child("type").getValue<String>()?.let {
@@ -161,7 +163,7 @@ class HistoryFragment : Fragment() {
 
                     workoutAdapter?.notifyDataSetChanged()
 
-                    UpdateView(totalTi, totalDi, trainings.size.toString(), calo)
+                    UpdateView(totalTi, totalDi.toString(), trainings.size.toString(), calo)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
