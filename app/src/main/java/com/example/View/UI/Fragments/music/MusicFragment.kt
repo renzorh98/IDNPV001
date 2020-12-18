@@ -35,7 +35,6 @@ class MusicFragment : Fragment(){
     private lateinit var btnPlayPause: FloatingActionButton
 
 
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
         inflater: LayoutInflater,
