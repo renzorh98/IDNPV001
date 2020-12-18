@@ -31,16 +31,16 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
 
     fun addTraining():Training? {
         val key = ref.child("trainings").push().key ?: return null
-        var training = Training(key, Calendar.getInstance().time.time,0.1,"", "run")
+        val training = Training(key, Calendar.getInstance().time.time,0.1,"", "run")
         ref.child("trainings").child(key).setValue(training)
         addUserWithTraining(key)
         return training
     }
 
     private fun addUserWithTraining(key: String?) {
-        var user:String = lgRepository.getCurrentUser()
+        val userID:String = lgRepository.getCurrentUserID()
         if(key!=null){
-            ref.child("userWithTrainings").child(user).child(key).setValue(true)
+            ref.child("userWithTrainings").child(userID).child(key).setValue(true)
         }
     }
     fun addCoordinateToTraining(key: String?, coordinate: Coordinate){

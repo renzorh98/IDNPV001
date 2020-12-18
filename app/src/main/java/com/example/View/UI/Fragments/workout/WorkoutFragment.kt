@@ -83,13 +83,19 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
             return
         }
         mMap.isMyLocationEnabled = true
+        mMap.uiSettings.isZoomControlsEnabled = true
+
         var isTraining: Boolean
         var locationTemp =  Coordinate(0.0,0.0)
         var distance = 0.0
 
         if(hasLocationPermission()){
 
-            button.setOnClickListener {
+            button.setOnClickListener{
+                chronometer.base = SystemClock.elapsedRealtime()
+                locationTemp.latitude = 0.0
+                locationTemp.latitude = 0.0
+                distance = 0.0
                 mMap.clear()
                 if (googleMap != null) {
                     mMap = googleMap
@@ -115,7 +121,7 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
                                         .title("Inicio"))
                             }
                             distance += sqrt((locationTemp.latitude - it.latitude).pow(2) + (locationTemp.longitude - it.longitude).pow(2))
-                            textView5.text = distance.toString()
+                            textView5.text = "%.2f".format(distance*100) + "km"
                             workoutViewModel.addCoordinateToTraining(training?.trainingId, it)
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16.0f))
                             polylineOptions.add(LatLng(it.latitude, it.longitude))
@@ -131,15 +137,15 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
                 isTraining = false
                 chronometer.stop()
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    workoutViewModel.setAttributesTraining(training, chronometer.text, distance)
+                    workoutViewModel.setAttributesTraining(training, chronometer.text, distance*100)
                 }
                 mMap.addMarker(
                     MarkerOptions()
                         .position(LatLng(locationTemp.latitude, locationTemp.longitude))
                         .title("Fin"))
-                distance = 0.0
-                textView5.text = distance.toString()
-                chronometer.base = SystemClock.elapsedRealtime()
+
+                textView5.text = "%.2f".format(distance*100) + "km"
+
                 button2.isEnabled = false
                 button.isEnabled = true
             }
