@@ -177,7 +177,8 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(route[0].latitude, route[0].longitude), 18.0f))
                         }
 
-                        updateView(name, date, time, distance, calories, speed)
+
+                        updateView(name, date, time, distance.toString().substring(0, distance.toString().indexOf(".") + 2) + "K", calories, speed)
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -194,11 +195,11 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
     }
 
 
-    fun updateView(name:String, date:String, time:String, distance:Double, calories:String, speed:String){
+    fun updateView(name:String, date:String, time:String, distance:String, calories:String, speed:String){
         nameWorkout.text = name
         dateWorkout.text = date
         timeWorkout.text = time
-        distanceWorkout.text = distance.toString()
+        distanceWorkout.text = distance
         caloriesWorkout.text = calories
         speedWorkout.text = speed
     }
