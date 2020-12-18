@@ -34,7 +34,6 @@ import kotlin.math.sqrt
 
 class WorkoutFragment : Fragment(), OnMapReadyCallback {
 
-
     private val LOCATION_PERMISSION_REQUEST_CODE = 2000
     private lateinit var workoutViewModel: WorkoutViewModel
     private lateinit var mMap: GoogleMap
@@ -58,6 +57,7 @@ class WorkoutFragment : Fragment(), OnMapReadyCallback {
 
         return root
     }
+
 
     private fun hasLocationPermission(): Boolean {
         return ContextCompat.checkSelfPermission(
