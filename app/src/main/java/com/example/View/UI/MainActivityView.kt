@@ -44,7 +44,7 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
 
 
         var PRIVATE_MODE = Context.MODE_PRIVATE
-        val PREF_NAME = "ActiveUserEnd"
+        val PREF_NAME = "ActiveUsersApp"
         val sharedPref: SharedPreferences = getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         val namAct: String? = sharedPref.getString("name", "0")
 
