@@ -33,7 +33,7 @@
         android:layout_marginBottom="231dp"
         android:max="100"
         android:maxHeight="5dp"
-        android:progress="40"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_seek_bar"
         android:thumb="@drawable/thumb_seek_bar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -122,46 +122,25 @@
 
     <ImageView
         android:id="@+id/btnPrev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="110dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="92dp"
         android:src="@drawable/ic_skip_previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currentSongStatus" />
 
     <ImageView
         android:id="@+id/btnSkip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="110dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="92dp"
         android:src="@drawable/ic_skip_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/currentSongStatus" />
 
-    <ImageView
-        android:id="@+id/btnLoop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="110dp"
-        android:src="@drawable/ic_loop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnSkip" />
-
-    <ImageView
-        android:id="@+id/btnShuffle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="110dp"
-        android:src="@drawable/ic_shuffle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPrev" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

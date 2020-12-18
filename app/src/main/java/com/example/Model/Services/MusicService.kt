@@ -94,6 +94,9 @@ class MusicService(): Service() {
     private fun resetPauseValue(){
         this.isOnPause = 0
     }
+    fun getCurrentPosition(): Int{
+        return mediaPlayer.currentPosition
+    }
 
 
 

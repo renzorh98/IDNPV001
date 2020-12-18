@@ -13,15 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.Model.Adapters.SongAdapter
 import com.example.Model.Adapters.WorkoutHistoryAdapter
-import com.example.Model.Entities.Song
 import com.example.Model.Entities.Workout
 import com.example.View.UI.MainActivityView
 import com.example.ViewModel.HistoryViewModel
 import com.example.ViewModel.LoginViewModel
 import com.example.idnpv001.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HistoryFragment : Fragment() {
 
@@ -55,6 +52,8 @@ class HistoryFragment : Fragment() {
             var loginViewModel: LoginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
             loginViewModel.logout()
             val intent = Intent(activity, MainActivityView::class.java)
+            (activity as MainActivityView).musicService?.stop()
+            (activity as MainActivityView).playerList?.restartPositionPlayList()
             startActivity(intent)
             activity?.finish()
         }

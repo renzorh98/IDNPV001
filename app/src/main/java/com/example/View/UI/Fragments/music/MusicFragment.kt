@@ -3,6 +3,7 @@ package com.example.View.UI.Fragments.music
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,9 @@ class MusicFragment : Fragment(){
     private lateinit var songTime: TextView
     private lateinit var songDuration: TextView
     private lateinit var currentSongAlbum: ImageView
+    private lateinit var seekBar: SeekBar
+    private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -40,6 +44,7 @@ class MusicFragment : Fragment(){
         val root = inflater.inflate(R.layout.fragment_music, container, false)
         (activity as MainActivityView).playerList.updatePlayerList()
 
+
         val goToList:ImageView = root.findViewById(R.id.musicList)
 
         goToList.setOnClickListener{
@@ -49,8 +54,8 @@ class MusicFragment : Fragment(){
         currentSongAlbum = root.findViewById(R.id.currentSongAlbum)
         var btnPrev: ImageView = root.findViewById(R.id.btnPrev)
         var btnSkip: ImageView = root.findViewById(R.id.btnSkip)
-        var btnLoop: ImageView = root.findViewById(R.id.btnLoop)
-        var btnSuffle: ImageView = root.findViewById(R.id.btnShuffle)
+        //var btnLoop: ImageView = root.findViewById(R.id.btnLoop)
+        //var btnSuffle: ImageView = root.findViewById(R.id.btnShuffle)
         var btnPlayPause: FloatingActionButton = root.findViewById(R.id.currentSongStatus)
 
         btnPlayPause.setOnClickListener {
@@ -68,14 +73,31 @@ class MusicFragment : Fragment(){
         songTime = root.findViewById(R.id.currentSongTime)
         songDuration = root.findViewById(R.id.currentSongTotalTime)
 
-        var seekBar: SeekBar = root.findViewById(R.id.currentSongProgress)
+        seekBar = root.findViewById(R.id.currentSongProgress)
+        seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                if(p2){
+                    (activity as MainActivityView).musicService?.seekTo(p1)
+                }
+            }
 
+            override fun onStartTrackingTouch(p0: SeekBar?) {
 
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+
+        })
         updateSelectedSong()
         return root
     }
 
     fun updateSelectedSong(){
+        if((activity as MainActivityView).musicService!!.isPlaying() || (activity as MainActivityView).musicService!!.isOnPause()){
+            initialiseSeekBar()
+        }
 
         var aux: Song = (activity as MainActivityView).playerList.getSongSelected()
 
@@ -104,6 +126,23 @@ class MusicFragment : Fragment(){
         else{
             Glide.with(activity as MainActivityView).asBitmap().load(R.drawable.ic_musical_notes).into(currentSongAlbum)
         }
+    }
+
+    fun initialiseSeekBar(){
+        seekBar.max = (activity as MainActivityView).musicService?.getDuration()!!
+
+        handler = Handler()
+        handler.postDelayed(object : Runnable{
+            override fun run() {
+                try {
+                    seekBar.progress = (activity as MainActivityView).musicService?.getCurrentPosition()!!
+
+                    handler.postDelayed(this, 1000)
+                }catch (e: Exception){
+                    seekBar.progress = 0
+                }
+            }
+        }, 0)
     }
 
 

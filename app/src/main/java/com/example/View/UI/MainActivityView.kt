@@ -195,6 +195,7 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
             try{
                 var fragment = getForegroundFragment()
                 (fragment as MusicFragment).updateSelectedSong()
+                (fragment as MusicFragment).initialiseSeekBar()
             }
             catch (e:Exception){
                 e.printStackTrace()
@@ -230,6 +231,7 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
             try{
                 var fragment = getForegroundFragment()
                 (fragment as MusicFragment).updateSelectedSong()
+                (fragment as MusicFragment).initialiseSeekBar()
             }
             catch (e:Exception){
                 e.printStackTrace()

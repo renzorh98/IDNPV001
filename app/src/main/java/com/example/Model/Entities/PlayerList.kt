@@ -82,6 +82,9 @@ class PlayerList(_context: Context): Serializable{
         }
         Log.e("position: ", this.select.toString())
     }
+    fun restartPositionPlayList(){
+        this.select = 0
+    }
 
 
 }
