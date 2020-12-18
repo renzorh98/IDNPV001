@@ -137,7 +137,9 @@ class HistoryDetail : Fragment(), OnMapReadyCallback {
                         }
 
                         snapshot.child("time").getValue<String>()?.let {
-                            time = it
+                            if(it.length > 1){
+                                time = it
+                            }
                         }
 
                         snapshot.child("type").getValue<String>()?.let {

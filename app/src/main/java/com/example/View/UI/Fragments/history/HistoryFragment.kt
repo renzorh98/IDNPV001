@@ -163,7 +163,7 @@ class HistoryFragment : Fragment() {
 
                     workoutAdapter?.notifyDataSetChanged()
 
-                    UpdateView(totalTi, totalDi.toString(), trainings.size.toString(), calo)
+                    UpdateView(totalTi, totalDi.toString().substring(0, totalDi.toString().indexOf(".") + 2) + "K", trainings.size.toString(), calo)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
