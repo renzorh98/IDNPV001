@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.example.Model.database.AppDatabase
-import com.example.dto.Training
 import com.example.dto.User
 import com.google.firebase.database.DatabaseReference
-import java.util.*
 
 class LoginRepository(context: Context) {
 
@@ -39,18 +37,22 @@ class LoginRepository(context: Context) {
         edit.putString("password$user", password)
         edit.putInt("type$user", type)
 
+        val key = ref.child("users").push().key ?: return
+        edit.putString("userID$user", key)
+
         val newUser = User(user, user, name, type)
-        ref.child("users").setValue(user)
-        ref.child("users").child(user).setValue(newUser)
+        ref.child("users").child(key).setValue(newUser)
+        //ref.child("users").child(user).setValue(newUser)
 
         edit.commit()
-        saveActUser(user, name, type)
+        saveActUser(user, name, type, key)
     }
 
-    private fun saveActUser(user: String, name: String, type: Int) {
+    private fun saveActUser(user: String, name: String, type: Int, key: String) {
         editAct.putString("name", name)
         editAct.putString("user", user)
         editAct.putInt("type", type)
+        editAct.putString("userID", key)
 
         editAct.commit()
     }
@@ -61,10 +63,12 @@ class LoginRepository(context: Context) {
         edit.putString("user", key)
         edit.putString("password", "null")
         edit.putInt("type", type)
+        edit.putString("userID", key)
+
         var newUser = User(key,key,key, 1)
         ref.child("users").child(key).setValue(newUser)
         edit.commit()
-        saveActUser(key, key, type)
+        saveActUser(key, key, type, key)
     }
 
     fun logout(){
@@ -78,6 +82,9 @@ class LoginRepository(context: Context) {
     fun getCurrentUserName(): String{
         return prefAct.getString("name","-1").toString()
     }
+    fun getCurrenUserID(): String{
+        return prefAct.getString("userID", "-1").toString()
+    }
 
     fun confirmLogin(user: String, password: String): Int{
         var pass = (pref.getString("password"+user,"-1").toString())
@@ -88,7 +95,9 @@ class LoginRepository(context: Context) {
         else if (pass.equals(password)){
             //correct data to login
             var name: String = (pref.getString("name"+user, "-1").toString())
-            saveActUser(user, name, 1)
+            var id: String = (pref.getString("userID"+user, "-1").toString())
+            saveActUser(user, name, 1, id)
+            Log.e("RESULT:",user+"\n"+name+"\n"+id  )
             return 1
         }
         //incorrect password
