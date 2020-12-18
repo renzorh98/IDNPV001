@@ -164,7 +164,10 @@ class MainActivityView : AppCompatActivity(), ServiceConnection, IActionPlaying{
                 btn_nextClicked(true)
 
             }//check but noy only here
-            musicService!!.start()}
+            musicService!!.start()
+            var fragment = getForegroundFragment()
+            (fragment as MusicFragment).initialiseSeekBar()
+        }
     }
 
     override fun btn_prevClicked(type: Boolean) {

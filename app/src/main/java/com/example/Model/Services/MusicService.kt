@@ -18,6 +18,7 @@ class MusicService(): Service() {
     var mBinder: IBinder = MyBinder()
     lateinit var mediaPlayer: MediaPlayer
     private var isOnPause = 0
+    private var isOnStop = 0
 
     override fun onCreate() {
         super.onCreate()
@@ -37,6 +38,7 @@ class MusicService(): Service() {
     fun start(){
         mediaPlayer.start()
         setPause(0)
+        setStop(0)
     }
     fun pause(){
         mediaPlayer.pause()
@@ -47,6 +49,7 @@ class MusicService(): Service() {
     }
     fun stop(){
         mediaPlayer.stop()
+        setStop(1)
     }
     fun release(){
         mediaPlayer.release()
@@ -86,10 +89,18 @@ class MusicService(): Service() {
     fun setPause(_pause_play: Int){
         this.isOnPause = _pause_play
     }
+    fun setStop(_pause_play: Int){
+        this.isOnStop = _pause_play
+    }
 
     fun isOnPause(): Boolean{
         return (isOnPause == 1)
     }
+
+    fun isOnStop(): Boolean{
+        return (isOnStop == 1)
+    }
+
 
     private fun resetPauseValue(){
         this.isOnPause = 0

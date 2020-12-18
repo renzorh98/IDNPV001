@@ -20,17 +20,20 @@ import com.example.View.UI.MainActivityView
 import com.example.ViewModel.MusicViewModel
 import com.example.idnpv001.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.concurrent.TimeUnit
 
 class MusicFragment : Fragment(){
     private lateinit var musicViewModel: MusicViewModel
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
     private lateinit var songTime: TextView
+    private lateinit var songCurrentTime : TextView
     private lateinit var songDuration: TextView
     private lateinit var currentSongAlbum: ImageView
     private lateinit var seekBar: SeekBar
     private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
+    private lateinit var btnPlayPause: FloatingActionButton
+
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -56,10 +59,12 @@ class MusicFragment : Fragment(){
         var btnSkip: ImageView = root.findViewById(R.id.btnSkip)
         //var btnLoop: ImageView = root.findViewById(R.id.btnLoop)
         //var btnSuffle: ImageView = root.findViewById(R.id.btnShuffle)
-        var btnPlayPause: FloatingActionButton = root.findViewById(R.id.currentSongStatus)
+        btnPlayPause = root.findViewById(R.id.currentSongStatus)
+        comprovePlayPause()
 
         btnPlayPause.setOnClickListener {
             (activity as MainActivityView).btn_play_pauseClicked()
+            comprovePlayPause()
         }
         btnSkip.setOnClickListener{
             (activity as MainActivityView).btn_nextClicked(false)
@@ -72,6 +77,7 @@ class MusicFragment : Fragment(){
         songArtist = root.findViewById(R.id.currentSongArtist)
         songTime = root.findViewById(R.id.currentSongTime)
         songDuration = root.findViewById(R.id.currentSongTotalTime)
+        songCurrentTime = root.findViewById(R.id.currentSongTime)
 
         seekBar = root.findViewById(R.id.currentSongProgress)
         seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
@@ -136,13 +142,29 @@ class MusicFragment : Fragment(){
             override fun run() {
                 try {
                     seekBar.progress = (activity as MainActivityView).musicService?.getCurrentPosition()!!
-
+                    songCurrentTime.text = transformTimes((activity as MainActivityView).musicService?.getCurrentPosition()!!.toLong())
                     handler.postDelayed(this, 1000)
                 }catch (e: Exception){
                     seekBar.progress = 0
                 }
             }
         }, 0)
+    }
+
+    private fun transformTimes(millis: Long):String{
+        var duration = String.format("%02d:%02d",
+            TimeUnit.MILLISECONDS.toMinutes(millis),
+            TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))
+
+        return duration
+    }
+
+    private fun comprovePlayPause(){
+        if ((activity as MainActivityView).musicService!!.isPlaying()){
+            btnPlayPause.setImageResource(R.drawable.ic_pause)
+        }else{
+            btnPlayPause.setImageResource(R.drawable.ic_play_arrow)
+        }
     }
 
 
